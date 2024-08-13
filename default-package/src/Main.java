@@ -5,7 +5,7 @@ public class Main {
 
         cc.depositar(150.00);
         cc.sacar(50.00);
-        cc.transferir(200.00, conta2);
+        cc.transferir(200.00, cp);
 
         cc.imprimirExtrato();
         cp.imprimirExtrato();
