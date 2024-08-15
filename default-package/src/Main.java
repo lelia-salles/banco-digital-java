@@ -1,13 +1,28 @@
+import model.Cliente;
+import model.Conta;
+import model.ContaCorrente;
+import model.ContaPoupanca;
+import service.BancoService;
+import util.Utils;
+
 public class Main {
     public static void main(String[] args) {
-        Conta cc = new ContaCorrente(500.00);
-        Conta cp = new Contapopanca(100.00);
+        Cliente cliente1 = new Cliente("Alice", "123.456.789-00");
+        Cliente cliente2 = new Cliente("Bob", "987.654.321-00");
 
-        cc.depositar(150.00);
-        cc.sacar(50.00);
-        cc.transferir(200.00, cp);
+        Conta contaCorrente = new ContaCorrente("001", cliente1, 500.0);
+        Conta contaPoupanca = new ContaPoupanca("002", cliente2);
 
-        cc.imprimirExtrato();
-        cp.imprimirExtrato();
+        contaCorrente.depositar(1000.0);
+        contaPoupanca.depositar(2000.0);
+
+        BancoService bancoService = new BancoService();
+        bancoService.transferir(contaCorrente, contaPoupanca, 300.0);
+
+        contaCorrente.imprimirExtrato();
+        contaPoupanca.imprimirExtrato();
+
+        // Usando lambda para imprimir uma mensagem
+        Utils.executarOperacao(mensagem -> System.out.println(mensagem), "Operação concluída com sucesso!");
     }
 }
